@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+#set -xv
+#exec 2> /tmp/$(basename $0).log
+export ORACLE_SID=DATA_DES
+export ORACLE_HOME=/apps/oracle/orabin/product/12.1.0/dbhome_1
+export PATH=$PATH:$ORACLE_HOME/bin:/usr/bin
+
+archdir=/apps/oracle/oradata/$ORACLE_SID/archive/$ORACLE_SID/archivelog
+lastdir=$(ls -t $archdir | head -1)
+ls -t $archdir/${lastdir}/*.arc | sed -n '2,$p' | xargs rm -f
+rman target / catalog rcat/rcat2019@catalog cmdfile $ORACLE_HOME/bin/purge.rman

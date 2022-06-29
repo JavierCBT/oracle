@@ -1,0 +1,1 @@
+select sum(space*8192)/1024/1024/1024 "Tamaño GB" from dba_recyclebin;

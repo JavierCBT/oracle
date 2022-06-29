@@ -1,0 +1,1 @@
+select b.instance_name, sum(a.bytes)/1024/1024/1024 Total_GB from dba_data_files a, v$instance b group by b.instance_name;
